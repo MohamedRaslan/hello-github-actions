@@ -29,10 +29,16 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
-      - shell: pwsh
+      - name: test output
+        shell: bash
+        run: |
+          echo "SUPER_SECRET: $env:SUPER_SECRET"
+          echo "injectedEnvVar: ${{secrets[github.event.inputs.injectedEnvVar]}}"
+          echo "Tags: $env:Tags"
+          echo "EnvVar: $env:EnvVar"
         env:
           SUPER_SECRET: ${{secrets[github.event.inputs.injectedEnvVar]}}
-        run: |
-          example-command "$env:SUPER_SECRET"
+          Tags: github.event.inputs.tags
+          EnvVar: github.event.inputs.injectedEnvVar
+          
 
