@@ -32,10 +32,10 @@ jobs:
       - name: test output
         shell: bash
         run: |
-          echo "SUPER_SECRET: $env:SUPER_SECRET"
+          echo "SUPER_SECRET: $SUPER_SECRET"
           echo "injectedEnvVar: ${{secrets[github.event.inputs.injectedEnvVar]}}"
-          echo "Tags: $env:Tags"
-          echo "EnvVar: $env:EnvVar"
+          echo "Tags: $Tags"
+          echo "EnvVar: $EnvVar"
         env:
           SUPER_SECRET: ${{secrets[github.event.inputs.injectedEnvVar]}}
           Tags: github.event.inputs.tags
