@@ -33,12 +33,13 @@ jobs:
         shell: bash
         run: |
           echo "SUPER_SECRET: $SUPER_SECRET"
-          echo "injectedEnvVar: ${{secrets[github.event.inputs.injectedEnvVar]}}"
+          echo "injectedEnvVar: ${{secrets[inputs.injectedEnvVar]}}"
           echo "Tags: $Tags"
           echo "EnvVar: $EnvVar"
+          echo "EnvVar: ::add-mask::$EnvVar"
         env:
           SUPER_SECRET: ${{secrets[github.event.inputs.injectedEnvVar]}}
-          Tags: github.event.inputs.tags
-          EnvVar: github.event.inputs.injectedEnvVar
+          Tags: ${{github.event.inputs.tags}}
+          EnvVar: ${{github.event.inputs.injectedEnvVar}}
           
 
